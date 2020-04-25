@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"updown525afb04": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
