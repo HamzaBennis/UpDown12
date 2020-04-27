@@ -39,7 +39,14 @@ class Home extends Component{
     })
 
   }
+  removeFile=()=>{
+    Storage.remove(this.state.filename, this.state.file)
+    .then(()=>{
+      console.log('sucessfulli removed')
+      this.setState({fileUrl: '', file: '', filename: ''})
+    })
 
+  }
   render(){
     return(
       <div className="Home12">
@@ -48,6 +55,7 @@ class Home extends Component{
         <button onClick={this.saveFile}>save File</button>
         <button onClick={this.listFile}>list File</button>
         <button onClick={this.donwloadFile}>dowlaod file</button>
+        <button onClick={this.removeFile}>remove file</button>
         </div>
     );
   }
