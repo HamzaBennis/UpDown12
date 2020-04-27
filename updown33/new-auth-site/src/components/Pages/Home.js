@@ -31,6 +31,15 @@ class Home extends Component{
     })
   }
 
+  donwloadFile=()=>{
+    Storage.get(this.state.filename, this.state.file,{ expires: 60 })
+    .then(()=>{
+      console.log('sucessfulli donwloaded')
+      this.setState({fileUrl: '', file: '', filename: ''})
+    })
+
+  }
+
   render(){
     return(
       <div className="Home12">
@@ -38,6 +47,7 @@ class Home extends Component{
         <img src={this.state.fileUrl} />
         <button onClick={this.saveFile}>save File</button>
         <button onClick={this.listFile}>list File</button>
+        <button onClick={this.donwloadFile}>dowlaod file</button>
         </div>
     );
   }
