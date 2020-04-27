@@ -1,22 +1,46 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { AppContent } from '../Layout'
+import React, { Component } from 'react'
 
-const Home = () => {
-  return (
-    <div className="container-login100">
-      <AppContent>
-        <h1>Here's the App Home Page</h1>
-        <p>
-          Since you are now logged in, view your profile: <Link to="/profile">View profile</Link>
-        </p>
-        <p>
-          This starter was built using AWS Amplify. Try it out:{' '}
-          <a href="https://console.amplify.aws">AWS Amplify</a>
-        </p>
-      </AppContent>
-    </div>
-  )
+import {Storage} from 'aws-amplify'
+
+class Home extends Component{
+  state={fileUrl:'', file:'', filename:''}
+  handleChange=e=>{
+    const file=e.target.files[0]
+    this.setState({
+      fileUrl: URL.createObjectURL(file),
+      file,
+      filename: file.name
+    })
+  }
+  saveFile=()=>{
+    Storage.put(this.state.filename, this.state.file)
+    .then(()=>{
+      console.log('succesfully saved file !')
+      this.setState({fileUrl: '', file: '', filename: ''})
+    })
+    .catch(err=>{
+      console.log('error uploading the file!',err)
+    })
+  }
+
+  listFile=()=>{
+    Storage.list(this.state.filename, this.state.file)
+    .then(()=>{
+      console.log('succesfully list file !')
+      this.setState({fileUrl: '', file: '', filename: ''})
+    })
+  }
+
+  render(){
+    return(
+      <div className="Home12">
+        <input type='file' onChange={this.handleChange}/>
+        <img src={this.state.fileUrl} />
+        <button onClick={this.saveFile}>save File</button>
+        <button onClick={this.listFile}>list File</button>
+        </div>
+    );
+  }
 }
 
 export default Home
