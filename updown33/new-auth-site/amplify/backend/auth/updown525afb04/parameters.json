@@ -1,6 +1,6 @@
 {
     "identityPoolName": "updown525afb04_identitypool_525afb04",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "updown525afb04",
     "userPoolName": "updown525afb04_userpool_525afb04",
     "autoVerifiedAttributes": [
