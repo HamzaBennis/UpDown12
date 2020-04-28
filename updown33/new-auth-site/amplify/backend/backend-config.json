@@ -1,16 +1,10 @@
 {
 	"auth": {
-		"updown525afb04": {
+		"updown0998cae1": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false
-		}
-	},
-	"storage": {
-		"updownamplifystorage": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
 		}
 	}
 }

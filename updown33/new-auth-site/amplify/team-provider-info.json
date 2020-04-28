@@ -1,37 +1,21 @@
 {
     "master": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-updown-master-213652-authRole",
-            "UnauthRoleArn": "arn:aws:iam::209234625590:role/amplify-updown-master-213652-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::209234625590:role/amplify-updown-master-213652-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "amplify-updown-master-213652-deployment",
-            "UnauthRoleName": "amplify-updown-master-213652-unauthRole",
-            "StackName": "amplify-updown-master-213652",
-            "StackId": "arn:aws:cloudformation:us-east-2:209234625590:stack/amplify-updown-master-213652/b96115d0-8673-11ea-8020-02c25da8714e",
-            "AmplifyAppId": "d1873xpyesq49c"
+            "AuthRoleName": "amplify-updown-master-31928-authRole",
+            "UnauthRoleArn": "arn:aws:iam::722066113941:role/amplify-updown-master-31928-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::722066113941:role/amplify-updown-master-31928-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-updown-master-31928-deployment",
+            "UnauthRoleName": "amplify-updown-master-31928-unauthRole",
+            "StackName": "amplify-updown-master-31928",
+            "StackId": "arn:aws:cloudformation:us-east-1:722066113941:stack/amplify-updown-master-31928/14a2e800-88ff-11ea-9d38-0eb5b83f8639",
+            "AmplifyAppId": "d3p4a9tuifv6tc"
         },
         "categories": {
             "auth": {
-                "updown525afb04": {}
-            }
-        }
-    },
-    "masterr": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-updown-masterr-225157-authRole",
-            "UnauthRoleArn": "arn:aws:iam::209234625590:role/amplify-updown-masterr-225157-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::209234625590:role/amplify-updown-masterr-225157-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "amplify-updown-masterr-225157-deployment",
-            "UnauthRoleName": "amplify-updown-masterr-225157-unauthRole",
-            "StackName": "amplify-updown-masterr-225157",
-            "StackId": "arn:aws:cloudformation:us-east-2:209234625590:stack/amplify-updown-masterr-225157/b5b01cc0-88d9-11ea-ad4b-06d9da1ade34",
-            "AmplifyAppId": "d1873xpyesq49c"
-        },
-        "categories": {
-            "auth": {
-                "updown525afb04": {}
+                "updown0998cae1": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"244123640326631\",\"client_secret\":\"80daedd3dcaa3603f3b3428cbb31e0ce\"},{\"ProviderName\":\"Google\",\"client_id\":\"37338356218-gj95f3lf92q1f86shrefhem08pqc8odu.apps.googleusercontent.com\",\"client_secret\":\"aqjL4kL4AhllgymeyFzeGXp6\"}]"
+                }
             }
         }
     }
