@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 function Nav() {
   return (
-    
+
     <nav className="navbar navbar-expand">
       <Link className="text-center" to="/">
         <h1 className="navbar-brand mb-0 text-primary">UpDown</h1>
@@ -14,14 +14,14 @@ function Nav() {
           <li className="nav-item">
             <Link className="text-center" to="/signin">
               <p style={{ margin: 0 }} className="nav-link">
-                SignIn
+                Sign in
               </p>
             </Link>
           </li>
           <li className="nav-item">
             <Link className="text-center" to="/signup">
               <p style={{ margin: 0 }} className="nav-link">
-                SignUp
+                Sign up
               </p>
             </Link>
           </li>

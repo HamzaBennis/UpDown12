@@ -1,14 +1,12 @@
-
-
-
 import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import React from 'react'
 import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 import { AppUser } from '../Auth'
 import { AuthForm, Email, Password } from '../Forms'
-import Amplify, { Auth, Hub } from 'aws-amplify';
-import awsconfig from '../../aws-exports';
+import Amplify, { Auth } from 'aws-amplify'
+import awsconfig from '../../aws-exports'
+import App from './App'
 Amplify.configure(awsconfig);
 
 class SignIn extends React.Component {
@@ -34,24 +32,8 @@ class SignIn extends React.Component {
       error: '',
     })
   }
-  componentDidMount() {
-    Hub.listen("auth", ({ payload: { event, data } }) => {
-      switch (event) {
-        case "signIn":
-          this.setState({ user: data });
-          break;
-        case "signOut":
-          this.setState({ user: null });
-          break;
-        case "customOAuthState":
-          this.setState({ customState: data });
-      }
-    });
 
-    Auth.currentAuthenticatedUser()
-      .then(user => this.setState({ user }))
-      .catch(() => console.log("Not signed in"));
-  }
+
 
   login = async e => {
     const { setUser } = AppUser
@@ -74,69 +56,78 @@ class SignIn extends React.Component {
     }
 
   }
-
+  facebookLogin() {
+    Auth.federatedSignIn({ provider: 'Facebook' }).then(() =>
+      Auth.currentSession()
+    )
+  }
   render() {
 
-
     return (
-      <header>
-        <div className="back">
-          <AuthForm title="Sign in to your account" error={this.state.error}>
-            <Email
-              handleUpdate={this.handleUpdate}
-              email={this.state.email}
-              autoComplete="on"
-            />
-            <Password
-              handleUpdate={this.handleUpdate}
-              password={this.state.password}
-              autoComplete="on"
-            />
-            <p className="text-center">
-              Forgot your password? <Link to="/reset">Reset password</Link>
+      <div>
+        <header>
+          <div className="back">
+            <AuthForm title="Sign in to your account" error={this.state.error}>
+              <Email
+                handleUpdate={this.handleUpdate}
+                email={this.state.email}
+                autoComplete="on"
+              />
+              <Password
+                handleUpdate={this.handleUpdate}
+                password={this.state.password}
+                autoComplete="on"
+              />
+              <p className="text-center">
+                Forgot your password? <Link to="/reset">Reset password</Link>
+              </p>
+              <div>
+                <button
+                  onClick={e => this.login(e)}
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading ? null : 'Sign In'}
+                  {this.state.loading && (
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  )}
+                </button>
+              </div>
+              <p style={{ marginTop: 30 }} className="text-center">
+                OR
             </p>
-            <div>
-              <button
-                onClick={e => this.login(e)}
-                type="submit"
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading ? null : 'Sign In'}
-                {this.state.loading && (
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                )}
-              </button>
-            </div>
-            <p style={{ marginTop: 30 }} className="text-center">
-              OR
-            </p>
-            <div >
-              <button
-                style={{ ...styles.button, ...styles.facebook }}
-                onClick={() => Auth.federatedSignIn({ provider: 'Facebook' })}
-              >
-                <FaFacebook color='white' />
-                <p style={styles.text}>Sign in with Facebook</p>
-              </button>
-              <button
-                style={{ ...styles.button, ...styles.google }}
-                onClick={() => Auth.federatedSignIn({ provider: 'Google' })}
-              >
-                <FaGoogle color='red' />
-                <p style={{ ...styles.text, ...styles.grayText }}>Sign in with Google</p>
-              </button>
-            </div>
-            <p style={{ marginTop: 40 }} className="text-center">
-              No account? <Link to="/signup">Create account</Link>
-            </p>
-          </AuthForm>
-        </div>
-      </header>
+              <div >
+
+                <button
+
+                  style={{ ...styles.button, ...styles.facebook }}
+                  onClick={(e) => { Auth.federatedSignIn({ provider: 'Facebook' }); e.preventDefault(); }}
+                >
+                  <FaFacebook color='white' />
+
+                  <p style={styles.text} >Sign in with Facebook</p>
+                </button>
+                <button
+                  style={{ ...styles.button, ...styles.google }}
+                  onClick={(e) => { Auth.federatedSignIn({ provider: 'Google' }); e.preventDefault(); }}
+                >
+                  <FaGoogle color='red' />
+                  <p style={{ ...styles.text, ...styles.grayText }}>Sign in with Google</p>
+                </button>
+
+              </div>
+              <p style={{ marginTop: 40 }} className="text-center">
+                No account? <Link to="/signup">Create account</Link>
+              </p>
+            </AuthForm>
+          </div>
+        </header >
+      </div>
     )
   }
 }
@@ -156,13 +147,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '0px 16px',
+    padding: '0px 60px',
     borderRadius: 2,
     boxShadow: '0px 1px 3px rgba(0, 0, 0, .3)',
     cursor: 'pointer',
     outline: 'none',
     border: 'none',
-    minHeight: 10
+    minHeight: 10,
+    borderRadius: 5
   },
   facebook: {
     backgroundColor: "#3b5998"
@@ -186,14 +178,15 @@ const styles = {
     backgroundColor: '#FF9900'
   },
   icon: {
-    height: 16,
+    height: 12,
     marginLeft: -1
   },
   text: {
     color: 'white',
     fontSize: 14,
     marginLeft: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+
   },
   blackText: {
     color: 'black'
